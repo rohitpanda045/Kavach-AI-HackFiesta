@@ -87,3 +87,78 @@ Every analysis ends with **exactly 3 simple steps**, such as:
 
 ## 🏗️ System Architecture
 
+```mermaid
+flowchart TB
+    %% =========================
+    %% Kavach AI – System Architecture
+    %% =========================
+
+    U[👤 End User<br/>(Elders / General Users)]
+    
+    %% ---------- Frontend ----------
+    U --> UI[🖥️ Streamlit Frontend<br/>Web UI / UX Layer]
+
+    UI --> TIN[📝 Text Input<br/>(SMS / Email / Chat)]
+    UI --> IIN[🖼️ Image Upload<br/>(Screenshot JPG/PNG)]
+    UI --> LOC[🌍 Country Selector]
+    UI --> LANG[🗣️ Language Selector]
+
+    %% ---------- Input Processing ----------
+    TIN --> IP[⚙️ Input Processing Layer]
+    IIN --> IP
+
+    IP -->|Validate Text| TV[✔️ Text Preprocessing]
+    IP -->|Validate Image| IV[✔️ Image Quality Check]
+    IV -->|Blurry / Invalid| ERR[⚠️ Graceful Error Message]
+    TV --> CTX
+    IV --> CTX
+
+    %% ---------- Localization ----------
+    LOC --> CTX
+    LANG --> CTX
+
+    CTX[🌐 Localization & Context Engine<br/>
+        • Country Rules<br/>
+        • Regional Scam Patterns<br/>
+        • Cultural Tone Mapping<br/>
+        • Local Reporting Channels]
+
+    %% ---------- Prompt Engineering ----------
+    CTX --> PROMPT[🧠 Prompt Engineering Layer<br/>
+        • Empathy-first Instructions<br/>
+        • No Technical Jargon<br/>
+        • Cultural Context Injection<br/>
+        • Safety Constraints]
+
+    %% ---------- AI Engine ----------
+    PROMPT --> AI[🤖 Google Gemini 1.5 Flash<br/>
+        • Text Understanding<br/>
+        • Image + OCR Reasoning<br/>
+        • Multimodal Analysis]
+
+    %% ---------- Risk & Response ----------
+    AI --> RISK[🚦 Risk Classification Engine]
+    RISK --> SAFE[🟢 Safe]
+    RISK --> SUSP[🟡 Suspicious]
+    RISK --> DANG[🔴 Dangerous]
+
+    SAFE --> RESP
+    SUSP --> RESP
+    DANG --> RESP
+
+    RESP[📄 Response Formatter<br/>
+        • Simple Explanation<br/>
+        • Native Language Output<br/>
+        • Exactly 3 Action Steps<br/>
+        • Local Helpline Mapping]
+
+    %% ---------- Output ----------
+    RESP --> OUT[📢 Output Delivery Layer<br/>
+        • Text Response<br/>
+        • Risk Meter UI Update<br/>
+        • Voice-ready Output]
+
+    OUT --> UI
+````
+
+-----
